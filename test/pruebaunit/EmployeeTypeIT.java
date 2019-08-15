@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static pruebaunit.EmployeeType.Manager;
+import static pruebaunit.EmployeeType.Supervisor;
 import static pruebaunit.EmployeeType.Worker;
 
 /**
@@ -21,22 +22,22 @@ import static pruebaunit.EmployeeType.Worker;
  * @author CltControl
  */
 public class EmployeeTypeIT {
-    
+
     public EmployeeTypeIT() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -44,7 +45,7 @@ public class EmployeeTypeIT {
     /**
      * Test of values method, of class EmployeeType.
      */
-  /*  @Test
+    /*  @Test
     public void testValues() {
         System.out.println("values");
         EmployeeType[] expResult = null;
@@ -53,11 +54,10 @@ public class EmployeeTypeIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }*/
-
     /**
      * Test of valueOf method, of class EmployeeType.
      */
-  /*  @Test
+    /*  @Test
     public void testValueOf() {
         System.out.println("valueOf");
         String name = "Worker";
@@ -67,47 +67,77 @@ public class EmployeeTypeIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }*/
-    /*EVALUACION DE BONUS ANUAL DEL EMPLEADO WORKER DONDE SU VALOR DEBE SER 386*/
+ /*EVALUACION DE BONUS ANUAL DEL EMPLEADO WORKER DONDE SU VALOR DEBE SER 386*/
     @Test
-    public void testBonusWorker(){
+    public void testBonusWorker() {
         System.out.println("Test Bonus Worker");
-        Double bonus=386.0;
+        Double bonus = 386.0;
         Currency c = Currency.getInstance(Locale.US);
-        Employee e= new Employee((float) 200.0, c, 10, Worker);
+        Employee e = new Employee((float) 200.0, c, 10, Worker);
         System.out.println(e.CalculateYearBonus());
         assertTrue(bonus.equals(Double.valueOf(e.CalculateYearBonus())));
     }
-     /*EVALUACION DE BONUS ANUAL DEL EMPLEADO MANAGER DONDE SU VALOR DEBE SER 386*/
+
+    /*EVALUACION DE BONUS ANUAL DEL EMPLEADO MANAGER DONDE SU VALOR DEBE SER 386*/
 
     @Test
-    public void testBonusManager(){
+    public void testBonusManager() {
         System.out.println("Test Bonus Manager");
         Double bonus = 386.0;
         Currency c = Currency.getInstance(Locale.US);
-        Employee e= new Employee((float) 200.0, c, 10, Manager);
+        Employee e = new Employee((float) 200.0, c, 10, Manager);
         System.out.println(e.CalculateYearBonus());
         assertFalse(bonus.equals(e.CalculateYearBonus()));
     }
-    
+
+    @Test
+    public void testBonusSuper() {
+        System.out.println("Test Bonus Supervisor");
+        Double bonus = 386.0;
+        Currency c = Currency.getInstance(Locale.US);
+        Employee e = new Employee((float) 200.0, c, 10, Supervisor);
+        System.out.println(e.CalculateYearBonus());
+        assertFalse(bonus.equals(e.CalculateYearBonus()));
+    }
+
     /*Evaluacion de salario Worker US*/
     @Test
-    public void testSalarioWorker(){
+    public void testSalarioWorker() {
         System.out.println("Test salario Worker currency US");
-        Double salarioExp=200.0;
+        Double salarioExp = 200.0;
         Currency c = Currency.getInstance(Locale.US);
-        Employee e= new Employee((float) 200.0, c, 10, Worker);
+        Employee e = new Employee((float) 200.0, c, 10, Worker);
         System.out.println(e.cs());
         assertTrue(salarioExp.equals(Double.valueOf(e.cs())));
     }
+
     /*Evaluacion de salario Worker UK*/
     @Test
-    public void testSalarioWorkerUK(){
+    public void testSalarioWorkerUK() {
         System.out.println("Test salario Worker currency UK");
-        Double salarioExp=190.0;
+        Double salarioExp = 190.0;
         Currency c = Currency.getInstance(Locale.UK);
-        Employee e= new Employee((float) 200.0, c, 10, Worker);
+        Employee e = new Employee((float) 200.0, c, 10, Worker);
         System.out.println(e.cs());
         assertTrue(salarioExp.equals(Double.valueOf(e.cs())));
     }
-    
+
+    @Test
+    public void testBonusWorkerUK() {
+        System.out.println("Test Bonus WorkerUK");
+        Double bonus = 386.0;
+        Currency c = Currency.getInstance(Locale.UK);
+        Employee e = new Employee((float) 200.0, c, 10, Worker);
+        System.out.println(e.CalculateYearBonus());
+        assertTrue(bonus.equals(Double.valueOf(e.CalculateYearBonus())));
+    }
+    /*Evaluacion dos empleados son iguales*/
+    @Test
+    public void testObjetos() {
+        System.out.println("Test Comparacion de Empleados");
+        Currency c = Currency.getInstance(Locale.US);
+        Employee a = new Employee((float) 200.0, c, 10, Worker );//new Employee((float) 200.0, c, 10, Worker);
+        Employee e = new Employee((float) 200.0, c, 10, Worker);
+        assertEquals(a,e);
+    }
 }

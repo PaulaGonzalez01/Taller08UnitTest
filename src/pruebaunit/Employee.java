@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Employee {   //remuneracion mensual unificada
 
@@ -84,4 +85,42 @@ public class Employee {   //remuneracion mensual unificada
         }
         return 0.0F;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 11 * hash + Float.floatToIntBits(this.salary);
+        hash = 11 * hash + Objects.hashCode(this.currency);
+        hash = 11 * hash + Float.floatToIntBits(this.bonusPercentage);
+        hash = 11 * hash + Objects.hashCode(this.employeeType);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Employee other = (Employee) obj;
+        if (Float.floatToIntBits(this.salary) != Float.floatToIntBits(other.salary)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.bonusPercentage) != Float.floatToIntBits(other.bonusPercentage)) {
+            return false;
+        }
+        if (!Objects.equals(this.currency, other.currency)) {
+            return false;
+        }
+        if (this.employeeType != other.employeeType) {
+            return false;
+        }
+        return true;
+    }
+    
 }
